@@ -101,9 +101,9 @@ async def pdisk_up(link):
     v_url = ''
     if 'data' in data:
       v_id = data['data']['item_id']
-      v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
+      v_url = ' https://www.pdisks.com/share-video?videoid=' + v_id
     else:
-      v_url = "Please check link"
+      v_url = link
     return (v_url)
 
 
