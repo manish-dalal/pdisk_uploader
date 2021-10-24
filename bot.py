@@ -59,9 +59,10 @@ async def get_ptitle(url):
         pass
     title = list(title.get_text())
     title = title[8:]
-    str = 't.me/' + CHANNEL + ' '
+    str = ''
     for i in title:
         str = str + i
+    str = str or ('t.me/' + CHANNEL)
     lst = list(html_text.split(","))
     c = 0
     for i in lst:
@@ -113,8 +114,7 @@ async def multi_pdisk_up(ml_string):
     for j in urls:
       new_join_str = new_join_str.replace(j, new_urls[index])
       index += 1
-        
-    print("new_join_str", new_join_str)
+ 
     return await addFooter(new_join_str)
 
 
