@@ -26,7 +26,7 @@ bot = Client('pdisk bot',
 async def start(bot, message):
     await message.reply(
         f"**𝗛𝗘𝗟𝗟𝗢🎈{message.chat.first_name}!**\n\n"
-        "𝐈'𝐦 𝐚 𝐏𝐝𝐢𝐬𝐤 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐫 𝐛𝐨𝐭. 𝐉𝐮𝐬𝐭 𝐬𝐞𝐧𝐝 𝐦𝐞 𝐥𝐢𝐧𝐤 𝐨𝐫 𝐅𝐮𝐥𝐥 𝐩𝐨𝐬𝐭... \n 𝐓𝐡𝐢𝐬 𝐛𝐨𝐭 𝐢𝐬 𝐦𝐚𝐝𝐞 𝐛𝐲 @DownloadOrWatchOnline💖")
+        "𝐈'𝐦 𝐚 𝐏𝐝𝐢𝐬𝐤 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐫 𝐛𝐨𝐭. 𝐉𝐮𝐬𝐭 𝐬𝐞𝐧𝐝 𝐦𝐞 𝐥𝐢𝐧𝐤 𝐨𝐫 𝐅𝐮𝐥𝐥 𝐩𝐨𝐬𝐭... \n 𝐓𝐡𝐢𝐬 𝐛𝐨𝐭 𝐢𝐬 𝐦𝐚𝐝𝐞 𝐛𝐲 @"+ CHANNEL +"💖")
 
 
 @bot.on_message(filters.text & filters.private)
@@ -96,7 +96,7 @@ async def pdisk_up(link):
         'http://linkapi.net/open/create_item?link_type=link&content_src=' + link + '&source=2000&cover_url='+THUMB_URL+'&api_key=' + PDISK_API_KEY + '&dir_id=0&title=' + title_pdisk + '&description=Join_' + CHANNEL + '_for_more_like_this')
     data = res.json()
     data = dict(data)
-    print(data)
+    print("pdisk data"data)
     v_id = data['data']['item_id']
     v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
     return (v_url)
@@ -108,27 +108,14 @@ async def multi_pdisk_up(ml_string):
 
     urls = re.findall(r'(https?://[^\s]+)', new_join_str)
 
-    nml_len = len(new_ml_string)
-    u_len = len(urls)
-    url_index = []
-    count = 0
-    for i in range(nml_len):
-        for j in range(u_len):
-            if (urls[j] in new_ml_string[i]):
-                url_index.append(count)
-        count += 1
     new_urls = await new_pdisk_url(urls)
-    url_index = list(dict.fromkeys(url_index))
-    i = 0
-    for j in url_index:
-        new_ml_string[j] = new_ml_string[j].replace(urls[i], new_urls[i])
-        i += 1
+    index = 0
+    for j in urls:
+      new_join_str = new_join_str.replace(j, new_urls[index])
+      index += 1
         
-    print(urls)
-    print(new_urls)
-    print(new_ml_string)
-    new_string = " ".join(new_ml_string)
-    return await addFooter(new_string)
+    print("new_join_str", new_join_str)
+    return await addFooter(new_join_str)
 
 
 async def new_pdisk_url(urls):
@@ -148,8 +135,6 @@ async def remove_username(new_List):
 
 async def addFooter(str):
     footer = """
-━━━━━━━━━━━━━━━
-⚙️ How to Download / Watch Online : https://t.me/DownloadOrWatchOnline
 ━━━━━━━━━━━━━━━
 ⭐️JOIN CHANNEL ➡️ t.me/""" + CHANNEL
     return str + footer
