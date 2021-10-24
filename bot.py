@@ -124,7 +124,10 @@ async def multi_pdisk_up(ml_string):
     for j in url_index:
         new_ml_string[j] = new_ml_string[j].replace(urls[i], new_urls[i])
         i += 1
-
+        
+    print(urls)
+    print(new_urls)
+    print(new_ml_string)
     new_string = " ".join(new_ml_string)
     return await addFooter(new_string)
 
