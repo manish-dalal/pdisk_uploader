@@ -98,8 +98,12 @@ async def pdisk_up(link):
     data = res.json()
     data = dict(data)
     print("pdisk data", data)
-    v_id = data['data']['item_id']
-    v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
+    v_url = ''
+    if 'data' in data:
+      v_id = data['data']['item_id']
+      v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
+    else:
+      v_url = "data Need to check"
     return (v_url)
 
 
