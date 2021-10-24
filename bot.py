@@ -112,7 +112,8 @@ async def multi_pdisk_up(ml_string):
     new_urls = await new_pdisk_url(urls)
     index = 0
     for j in urls:
-      new_join_str = new_join_str.replace(j, new_urls[index])
+      if len(new_urls) > index:
+        new_join_str = new_join_str.replace(j, new_urls[index])
       index += 1
  
     return await addFooter(new_join_str)
@@ -137,6 +138,6 @@ async def addFooter(str):
     footer = """
 ━━━━━━━━━━━━━━━
 ⭐️JOIN CHANNEL ➡️ t.me/""" + CHANNEL
-    return str + footer
+    return str
 
 bot.run()
