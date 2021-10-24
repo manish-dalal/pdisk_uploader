@@ -109,6 +109,7 @@ async def pdisk_up(link):
 
 async def multi_pdisk_up(ml_string):
     new_ml_string = list(map(str, ml_string.split(" ")))
+    new_ml_string = await remove_username(new_ml_string)
     new_join_str = "".join(new_ml_string)
 
     urls = re.findall(r'(https?://[^\s]+)', new_join_str)
@@ -125,16 +126,25 @@ async def multi_pdisk_up(ml_string):
 
 async def new_pdisk_url(urls):
     new_urls = []
+    urls_dict = {}
     for i in urls:
-        time.sleep(0.2)
-        new_urls.append(await pdisk_up(i))
+        new_link = ''
+        if i in urls_dict:
+          new_link = urls_dict[i]
+        else:
+          time.sleep(0.2)
+          new_link = await pdisk_up(i)
+          urls_dict[i] = new_link
+        new_urls.append(new_link)
     return new_urls
 
 
 async def remove_username(new_List):
+    index = 0
     for i in new_List:
         if('@' in i or 't.me' in i or 'https://bit.ly/3m4gabB' in i or 'https://bit.ly/pdisk_tuts' in i or 'telegra.ph' in i):
-            new_List.remove(i)
+            new_List[index] = "@" + CHANNEL
+        index += 1
     return new_List
 
 
