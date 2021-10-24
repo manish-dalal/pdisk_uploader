@@ -103,9 +103,9 @@ async def pdisk_up(link):
       v_id = data['data']['item_id']
       v_url = ' https://www.pdisks.com/share-video?videoid=' + v_id
     elif 'msg' in data:
-      v_url = data['msg']
+      v_url = " " + data['msg']
     else:
-      v_url = 'Error'
+      v_url = ' Error'
     return (v_url)
 
 
@@ -145,7 +145,7 @@ async def remove_username(new_List):
     index = 0
     for i in new_List:
         if('@' in i or 't.me' in i or 'https://bit.ly/3m4gabB' in i or 'https://bit.ly/pdisk_tuts' in i or 'telegra.ph' in i):
-            new_List[index] = "@" + CHANNEL
+            new_List[index] = " @" + CHANNEL
         index += 1
     return new_List
 
