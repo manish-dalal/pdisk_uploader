@@ -135,7 +135,8 @@ async def new_pdisk_url(urls):
           new_link = urls_dict[i]
         else:
           time.sleep(0.2)
-          new_link = await pdisk_up(i)
+          new_link = i
+#           new_link = await pdisk_up(i)
           urls_dict[i] = new_link
         new_urls.append(new_link)
     return new_urls
