@@ -101,7 +101,7 @@ async def pdisk_up(link):
     v_url = ''
     if 'data' in data:
       v_id = data['data']['item_id']
-      v_url = ' https://www.pdisks.com/share-video?videoid=' + v_id
+      v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
     elif 'msg' in data:
       v_url = " " + data['msg']
     else:
@@ -135,8 +135,7 @@ async def new_pdisk_url(urls):
           new_link = urls_dict[i]
         else:
           time.sleep(0.2)
-          new_link = i
-#           new_link = await pdisk_up(i)
+          new_link = await pdisk_up(i)
           urls_dict[i] = new_link
         new_urls.append(new_link)
     return new_urls
